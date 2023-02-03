@@ -12,6 +12,9 @@ const gameboard = {
     bindEvents() {
         this.slot.forEach(element => {
             element.addEventListener("click", (e) => {
+                if (this.gameSlot[e.target.id] !== null) {
+                    return;
+                }
                 if (player1Turn) {
                 this.gameSlot[e.target.id] = player1.symbol;
             } else {

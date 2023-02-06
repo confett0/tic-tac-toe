@@ -20,8 +20,8 @@ h1 {
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
     margin: auto;
-    height: 600px;
-    max-width: 600px;
+    height: 500px;
+    max-width: 500px;
 }
 
 .gameboard-slot {

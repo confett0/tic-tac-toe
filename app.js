@@ -14,23 +14,12 @@ const gameboard = {
   },
   bindEvents() {
     this.slot.forEach((element) => {
-      element.addEventListener("click", (e) => {
-        if (this.board[e.target.id] !== null) {
-          return;
-        }
-        if (gameFlow.turn === "player1") {
-          this.board[e.target.id] = player1.symbol;
-        } else {
-          this.board[e.target.id] = player2.symbol;
-        }
-        gameFlow.moveCounter++;
-        this.arrayToGameboard();
-        gameFlow.switchPlayerTurn();
-        gameFlow.winGame();
-      });
+      element.addEventListener("click", this.play);
     });
   },
+
   arrayToGameboard() {
+    // assign array elements to board
     let i = 0;
     while (i < this.board.length) {
       this.slot.forEach((element) => {
@@ -38,26 +27,80 @@ const gameboard = {
         i++;
       });
     }
-  }
+  },
+
+  play(e) {
+    if (gameboard.board[e.target.id] !== null) {
+      return;
+    }
+    if (gameFlow.currentPlayer === "player1") {
+      gameboard.board[e.target.id] = player1.symbol;
+    } else {
+      gameboard.board[e.target.id] = player2.symbol;
+    }
+    gameFlow.moveCounter++;
+    gameboard.arrayToGameboard();
+    gameFlow.switchPlayerTurn();
+    gameFlow.endGame();
+  },
 };
 
 gameboard.init();
 
 const gameFlow = {
+  winner: "",
   moveCounter: 0,
-  turn: "player1",
+  currentPlayer: "player1",
   switchPlayerTurn() {
-    this.turn === "player1" ? this.turn = "player2" : this.turn = "player1";
+    this.currentPlayer === "player1"
+      ? (this.currentPlayer = "player2")
+      : (this.currentPlayer = "player1");
   },
 
-  winGame() {
-    if (
-      gameboard.board[0] ===
-      gameboard.board[1] &&
-      gameboard.board[1] ===
-      gameboard.board[2]
-    ) {
-      console.log("you win");
-    } 
+  endGame() {
+    if (this.moveCounter >= 5) {
+      this.checkWinner();
+      // check for draw
+      if (this.moveCounter === 9 && this.winner === undefined) {
+        this.winner = "draw";
+      }
+    }
+  },
+
+  winLines: [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ],
+
+  checkWinner() {
+    for (let i = 0; i < 7; i++) {
+      const winCondition = this.winLines[i];
+      const a = gameboard.board[winCondition[0]];
+      const b = gameboard.board[winCondition[1]];
+      const c = gameboard.board[winCondition[2]];
+
+      if (a === null || b === null || c === null) {
+        continue;
+      }
+      if (a === b && b === c) {
+        this.winner = a;
+        break;
+      }
+    }
+    console.log(this.winner);
+    return this.winner;
+  },
+
+  resetGame() {
+    gameboard.board = [null, null, null, null, null, null, null, null, null];
+    this.moveCounter = 0;
+    this.currentPlayer = "player1";
+    this.winner = "";
   },
 };

@@ -7,11 +7,22 @@
 body {
     background-color: #72A9AC;
     color: #E6EAEB;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-family: "Varela Round";
-    padding: 20px;
+    padding: 15px 20px;
     min-height: 100vh;
     width: 100vw;
     text-align: center;
+}
+
+a {
+    color: #34767E;
+}
+
+a:hover {
+    color: #FFD447;
 }
 
 h1 {
@@ -32,7 +43,7 @@ h2 {
     margin: auto;
     margin-bottom: 30px;
     height: 500px;
-    max-width: 500px;
+    width: 500px;
 }
 
 .gameboard-cell {
@@ -56,10 +67,31 @@ button {
     border: none;
     font-size: 1rem;
     padding: 16px 32px;
+    margin-bottom: 40px;
     text-transform: uppercase;
 }
 
 button:hover {
     background-color: #FFD447;
     color: #252525;
+}
+
+@media screen and (max-width: 580px) {
+
+    .gameboard {
+        height: 400px;
+        width: 400px;
+    }
+
+    .gameboard-cell {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .gameboard {
+        height: 330px;
+        width: 330px;
+    }
 }

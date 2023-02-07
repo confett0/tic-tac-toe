@@ -5,6 +5,9 @@
 }
 
 body {
+    background-color: #72A9AC;
+    color: #E6EAEB;
+    font-family: "Varela Round";
     padding: 20px;
     min-height: 100vh;
     width: 100vw;
@@ -12,18 +15,51 @@ body {
 }
 
 h1 {
+    color: #FFD447;
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+h2 {
     margin-bottom: 25px;
 }
 
 .gameboard {
-    border: 1px solid;
+    border: 2px solid #FFD447;
     display: grid;
     grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
     margin: auto;
+    margin-bottom: 30px;
     height: 500px;
     max-width: 500px;
 }
 
-.gameboard-slot {
-    border: 1px solid;
+.gameboard-cell {
+    border: 2px solid #FFD447;
+    cursor: pointer;
+    display: grid;
+    align-items: center;
+    font-size: 7rem;
+    text-transform: uppercase;
+}
+
+.gameboard-cell:hover {
+    background-color: #34767E;
+}
+
+button {
+    background-color: #34767E;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    padding: 16px 32px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #FFD447;
+    color: #252525;
 }
